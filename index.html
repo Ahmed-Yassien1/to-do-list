@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>memorygame</title>
+    <style> 
+*{box-sizing: border-box;}body{font-family: Arial, Helvetica, sans-serif;}.control-buttons{position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: 2;background-color: #2196f3ba;}
+.control-buttons span{background-color: #f44336;color: white;padding: 15px 25px;font-size:30px;text-align: center;border-radius: 19px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);cursor: pointer;}
+.info-container{width: 1080px;margin: 20px auto 0;background-color: #f6f6f6;font-size: 24px;padding: 20px;overflow: hidden;border:5px solid #2196f3}.info-container .name{float: left;width: 50%;}.info-container .tries{float: right;width: 50%;text-align: right;}
+.memory-game-blocks{display: flex;width: 1100px;flex-wrap: wrap;margin: 20px auto;}.memory-game-blocks.no-clicking{pointer-events: none;}.memory-game-blocks .game-block{height: 200px;transition: transform .5s;transform-style: preserve-3d;cursor: pointer;position: relative;flex:1 0 200px;margin: 0 10px 20px;}
+.memory-game-blocks .game-block .front{background-color: #333;line-height: 200px;}.memory-game-blocks .game-block .front::before{content: "?";color: #fff;font-size: 140px;}
+.memory-game-blocks .game-block .back{
+    transform: rotateY(180deg)
+}
+.memory-game-blocks .game-block .back img{
+width: 140px;
+    height: 140px;
+    margin-top: 30px;
+}
+.memory-game-blocks .game-block .face{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    backface-visibility: hidden;
+    border: 5px solid #2196f3;
+}
+.fliped{
+-webkit-transform: rotateY(180deg);
+     -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg); 
+}
+.matched{
+    -webkit-transform: rotateY(180deg);
+     -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+}  
+.no{
+    background-color: #f44336;
+}
+    </style>
+</head>
+<body>
+    <div class="control-buttons">
+        <span>Start Game</span>
+    </div>
+<div class="info-container">
+    <div class="name">
+Hello : <span></span>
+    </div>
+    <div class="tries">
+        wrong tries : <span>0</span>
+    </div>
+    </div>
+    <div class="memory-game-blocks">
+<div class="game-block" data-img='a'>
+    <div class="face front">
+    
+    </div>
+    <div class="face back">
+<img src="img/1.jfif" >
+    </div>
+</div>
+<div class="game-block" data-img='a'>
+    <div class="face front">
+
+    </div>
+    <div class="face back">
+        <img src="img/1.jfif" >
+    </div>
+</div>
+<div class="game-block" data-img='b'>
+    <div class="face front">
+
+    </div>
+    <div class="face back">
+        <img src="img/2.png">
+    </div>
+</div>
+<div class="game-block" data-img='b'>
+    <div class="face front">
+
+    </div>
+    <div class="face back">
+        <img src="img/2.png" >
+    </div>
+          </div>
+        <div class="game-block" data-img='c'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/3.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='c'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/3.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='d'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/4.jfif">
+            </div>
+        </div>
+        <div class="game-block" data-img='d'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/4.jfif">
+            </div>
+        </div>
+        <div class="game-block" data-img='e'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/5.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='e'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/5.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='f'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/6.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='f'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/6.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='g'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/7.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='g'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/7.png">
+            </div>
+        </div> 
+        <div class="game-block" data-img='h'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/8.jfif">
+            </div>
+        </div>
+        <div class="game-block" data-img='h'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/8.jfif">
+            </div>
+        </div>
+        <div class="game-block" data-img='i'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/9.png">
+            </div>
+        </div>
+        <div class="game-block" data-img='i'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/9.png">
+            </div>
+        </div> 
+        <div class="game-block" data-img='j'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/10.jfif">
+            </div>
+        </div>
+        <div class="game-block" data-img='j'>
+            <div class="face front">
+        
+            </div>
+            <div class="face back">
+                <img src="img/10.jfif">
+            </div>
+        </div>
+    </div>
+    <audio src="audio/mixkit-classic-short-alarm-993.wav"id="fail"preload="auto"></audio>
+    <audio src="audio/a.mp3" id="seccess" preload="auto"></audio>
+    <audio src="audio/Congratulation Royalty-Free Music & Sounds.mp3" id="cong" preload="auto"></audio>
+
+<script >
+    document.querySelector(".control-buttons span").onclick = function () {
+            let yourName = prompt("whats your name ?");
+            if (yourName == null || yourName == "") {
+                document.querySelector('.name span').innerHTML = "UnKnown";
+            } else {
+                document.querySelector('.name span').innerHTML = yourName;
+                document.getElementById('cong').play();
+            }
+            document.querySelector(".control-buttons").remove();
+        };
+        let duration = 500,
+            blocksContainer = document.querySelector('.memory-game-blocks'),
+            blocks = Array.from(blocksContainer.children),
+            orderRange = [...Array(blocks.length).keys()];
+        // console.log(orderRange);
+        shuffle(orderRange);
+        // console.log(orderRange);
+        blocks.forEach((block, index) => {
+            // console.log(index)
+            block.style.order = orderRange[index];
+            block.addEventListener('click', function () {
+                fliped(block)
+            })
+        });
+        function fliped(selectedBlock) {
+            selectedBlock.classList.add('fliped');
+            var allFlipedBlocks = blocks.filter(flipedBlocks => flipedBlocks.classList.contains('fliped'))
+            if (allFlipedBlocks.length === 2) {
+                stopClicking();
+                checkMatched(allFlipedBlocks[0], allFlipedBlocks[1])
+            }
+        }
+        function stopClicking() {
+            blocksContainer.classList.add('no-clicking');
+            setTimeout(() => {
+                blocksContainer.classList.remove('no-clicking');
+            }, duration);
+        }
+        function checkMatched(firstBlock, secondBlock) {
+            var tries = document.querySelector('.tries span');
+            if (firstBlock.dataset.img === secondBlock.dataset.img) {
+                firstBlock.classList.remove('fliped');
+                secondBlock.classList.remove('fliped');
+                firstBlock.classList.add('matched');
+                secondBlock.classList.add('matched');
+                document.getElementById('seccess').play();
+            } else {
+                tries.innerHTML = parseInt(tries.innerHTML) + 1;
+                setTimeout(() => {
+                    firstBlock.classList.remove('fliped');
+                    secondBlock.classList.remove('fliped');
+                    document.getElementById('fail').play();
+                }, duration)
+
+            }
+           
+
+
+
+        }
+       if(blocks.length===20){
+           console.log('aaaa')
+       }
+
+        function shuffle(array) {
+            let current = array.length,
+                temp,
+                random;
+            while (current > 0) {
+                random = Math.floor(Math.random() * current);
+                current--;
+                temp = array[current];
+                array[current] = array[random];
+                array[random] = temp;
+
+            }
+            return array;
+        }
+
+</script>
+</body>
+</html>
